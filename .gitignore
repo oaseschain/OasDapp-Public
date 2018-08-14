@@ -1,1 +1,8 @@
 oas-server/bin
+oas-server/.gradle
+oas-server/.settings
+oas-server/core/.settings
+oas-server/core/bin
+oas-server/oas/.setting
+oas-server/oas/bin
+
