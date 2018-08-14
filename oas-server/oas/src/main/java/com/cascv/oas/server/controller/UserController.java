@@ -21,11 +21,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class UserController {
-	
+
 	@RequestMapping(value="/login", method=RequestMethod.POST, consumes="application/json", produces="application/json")
 	@ResponseBody
 	public ResponseEntity<?> login(@RequestBody UserModel userModel,HttpServletResponse response) {
-		log.info("name {}, password {}", userModel.getName(), userModel.getPassword());
+		log.info("authentication name {}, password {}", userModel.getName(), userModel.getPassword());
 		UsernamePasswordToken token = new UsernamePasswordToken(userModel.getName(), userModel.getPassword(), false);
         Subject subject = SecurityUtils.getSubject();
         try {
@@ -39,5 +39,12 @@ public class UserController {
             }
             return new ResponseEntity.Builder<Integer>().setData(0).setStatus(1).setMessage(msg).build();
         }
+	}
+	
+	@RequestMapping(value="/userCenter/register", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	@ResponseBody
+	public ResponseEntity<?> register(@RequestBody UserModel userModel) {
+		log.info("register name {}, password {}", userModel.getName(), userModel.getPassword());
+		return new ResponseEntity.Builder<Integer>().setData(0).setStatus(0).setMessage("ok").build();
 	}
 }
