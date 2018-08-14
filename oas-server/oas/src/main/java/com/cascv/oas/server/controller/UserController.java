@@ -34,8 +34,7 @@ public class UserController {
             return new ResponseEntity.Builder<Integer>().setData(0).setStatus(0).setMessage("ok").build();
         } catch (AuthenticationException e)  {
             String msg = "用户或密码错误";
-            if (StringUtils.isNotEmpty(e.getMessage()))
-            {
+            if (StringUtils.isNotEmpty(e.getMessage())) {
                 msg = e.getMessage();
             }
             return new ResponseEntity.Builder<Integer>().setData(0).setStatus(1).setMessage(msg).build();

@@ -23,11 +23,9 @@ public class UserOnline extends BaseEntity {
     @Getter @Setter private OnlineStatus status = OnlineStatus.on_line;/** 在线状态 */
     @Getter @Setter private OnlineSession session;	/** 备份的当前用户会话 */
 
-    /**
-     * 设置session对象
-     */
-    public static final UserOnline fromOnlineSession(OnlineSession session)
-    {
+    
+    // session对象
+    public static final UserOnline fromOnlineSession(OnlineSession session) {
         UserOnline online = new UserOnline();
         online.setSessionId(String.valueOf(session.getId()));
         online.setLoginName(session.getLoginName());
@@ -45,12 +43,9 @@ public class UserOnline extends BaseEntity {
 
 
     @Override
-    public String toString()
-    {
-        return "UserOnline [sessionId=" + sessionId + ", loginName=" + loginName
-                + ", startTime=" + startTime
-                + ", lastAccessTime=" + lastAccessTime + ", expireTime=" + expireTime + ", status=" + status
-                + ", session=" + session + "]";
+    public String toString() {
+      return "UserOnline [sessionId=" + sessionId + ", loginName=" + loginName
+        + ", startTime=" + startTime + ", lastAccessTime=" + lastAccessTime 
+        + ", expireTime=" + expireTime + ", status=" + status + ", session=" + session + "]";
     }
-
 }

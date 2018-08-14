@@ -16,15 +16,12 @@ import com.cascv.oas.core.model.UserModel;
 import com.cascv.oas.server.shiro.OnlineSessionDAO;
 import com.cascv.oas.server.utils.ShiroUtils;
 
-/**
- * 自定义访问控制
- */
+// 自定义访问控制
 public class OnlineSessionFilter extends AccessControlFilter
 {
 
-    /**
-     * 强制退出后重定向的地址
-     */
+    
+    // * 强制退出后重定向的地址
     @Value("${shiro.user.loginUrl}")
     private String loginUrl;
 
@@ -39,13 +36,11 @@ public class OnlineSessionFilter extends AccessControlFilter
             throws Exception
     {
         Subject subject = getSubject(request, response);
-        if (subject == null || subject.getSession() == null)
-        {
+        if (subject == null || subject.getSession() == null) {
             return true;
         }
         Session session = onlineSessionDAO.readSession(subject.getSession().getId());
-        if (session != null && session instanceof OnlineSession)
-        {
+        if (session != null && session instanceof OnlineSession)  {
             OnlineSession onlineSession = (OnlineSession) session;
             request.setAttribute(ShiroConstants.ONLINE_SESSION, onlineSession);
             // 把user对象设置进去
@@ -69,9 +64,8 @@ public class OnlineSessionFilter extends AccessControlFilter
         return true;
     }
 
-    /**
-     * 表示当访问拒绝时是否已经处理了；如果返回true表示需要继续处理；如果返回false表示该拦截器实例已经处理了，将直接返回即可。
-     */
+    
+    // 表示当访问拒绝时是否已经处理了；如果返回true表示需要继续处理；如果返回false表示该拦截器实例已经处理了，将直接返回即可。
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception
     {
