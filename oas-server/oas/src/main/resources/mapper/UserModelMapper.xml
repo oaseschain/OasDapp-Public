@@ -7,15 +7,26 @@
     <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_info(name,nickname,password) 
+    insert into user_info(name,nickname,password,inviteCode,created) 
      	values 
-     (#{name,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
+     (#{name,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{inviteCode,jdbcType=VARCHAR},#{created,jdbcType=VARCHAR})
   </insert>
 
   <!-- delete user -->
   <delete id="deleteUser">
     delete from user_info where id = #{id}
   </delete>
+  
+  
+  <!-- 查看用户信息 -->
+  <select id="selectUserInfoById" resultType="com.cascv.oas.core.model.UserModel">
+      select nickname, gender, address, birthday, mobile, email from user_info where id = #{id}
+  </select>
+  
+  <!-- 登录 -->
+  <select id="login" resultType="com.cascv.oas.core.model.UserModel">
+      select * from user_info where name=#{name} and password=#{password}
+  </select>
 	
 </mapper>
 
